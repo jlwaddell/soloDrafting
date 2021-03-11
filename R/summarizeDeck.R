@@ -19,7 +19,7 @@ summarizeDeck <- function(main, draftedCards, cmc, type) {
 	
 	for(i in seq_along(main)) {
 		if(main[i] %in% draftedCards) {
-			idx <- which(draftedCards == main[i])
+			idx <- which(draftedCards == main[i])[1]
 			typeOut[i] <- type[idx]
 		} else
 		 	typeOut[i] <- "Land"

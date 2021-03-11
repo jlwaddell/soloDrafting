@@ -18,7 +18,7 @@ deckTableBuild <- function(main, deck, cmc) {
 		for(i in seq_along(main)) {
 			
 			if(main[i] %in% deck) {
-				cmcTmp <- cmc[which(deck == main[i])]
+				cmcTmp <- cmc[which(deck == main[i])[1]]
 			} else 
 				cmcTmp <- 0
 			

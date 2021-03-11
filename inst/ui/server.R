@@ -171,7 +171,12 @@ function(input, output, session) {
 				if(input$nMountain > 0) main <- c(main, rep("Mountain", input$nMountain))
 				if(input$nForest > 0) main <- c(main, rep("Forest", input$nForest))
 				
-				cat(main, sep = "\n1 ", file = file) 			
+				cat(main, sep = "\n1 ", file = file) 	
+				cat("\n\n", file = file, append = TRUE)
+				
+				side <- input$mychooser$right
+				side[1] <- paste0("1 ", side[1])
+				cat(side, sep = "\n1 ", file = file, append = TRUE) 
 			}
 	)
 	
