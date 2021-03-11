@@ -26,7 +26,6 @@ uiFiles <- uiFiles[!(uiFiles %in% c("global.R"))]
 offset <- 0
 
 # assemble the cube (WIP)
-library(xlsx)
 cubeFile <- system.file("extdata", "shinyData.RData", package="cubeShiny")
 load(cubeFile)
 cube <- data

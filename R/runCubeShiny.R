@@ -8,33 +8,26 @@
 #' @export
 runCubeShiny <- function(installDependencies = FALSE, ...){
 	
-  # (1) Install all suggested R packages (see DESCRIPTION)
-  if (installDependencies) {
-    
-    ## (a) CRAN packages
-	if(requireNamespace("devtools"))
-	    update(
-			devtools::dev_package_deps(
-				pkg = system.file("ui", package = "cubeShiny"), dependencies = "Suggests")
+	# (1) Install all suggested R packages (see DESCRIPTION)
+	if (installDependencies) {
+		
+		## (a) CRAN packages
+		if(requireNamespace("devtools"))
+			update(
+					devtools::dev_package_deps(
+							pkg = system.file("ui", package = "cubeShiny"), dependencies = "Suggests")
 			)
-    
-    
-    ## (b) non-CRAN packages - by hand
-#    if (!requireNamespace("rhandsontable")) {
-#      
-#      install_github("jrowen/rhandsontable")
-#      
-#    }
-    
-  }
-  
-  
+		
+		
+	}
+	
+	
 	# (2) Copy the UI files & folders from "inst/ui" for local use
-  
-  tmpDir <- tempdir()
-  oldDir <- setwd(tmpDir)
-  on.exit(setwd(oldDir))
-  
+	
+	tmpDir <- tempdir()
+	oldDir <- setwd(tmpDir)
+	on.exit(setwd(oldDir))
+	
 	uiDir <- system.file("ui", package = "cubeShiny")
 	uiFiles <- list.files(path = uiDir, full.names = FALSE, recursive = TRUE)
 	
