@@ -147,7 +147,7 @@ function(input, output, session) {
 				)
 			})
 	output$selection <- renderPrint(
-			summarizeDeck(main = input$mychooser$left, 
+			summarizeDeck(main = input$mychooser$left[order(input$mychooser$left)], 
 					draftedCards = values$deck, cmc = values$cmc,
 					type = values$type)
 	)
