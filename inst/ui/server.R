@@ -143,11 +143,11 @@ function(input, output, session) {
 	# TODO add other basics
 	output$secondSelection <- renderUI({
 				chooserInput("mychooser", "Available frobs", "Selected frobs",
-						values$deck, c(), size = 35, multiple = TRUE  # LETTERS[1:5]
+						values$deck[order(values$deck)], c(), size = 35, multiple = TRUE  # LETTERS[1:5]
 				)
 			})
 	output$selection <- renderPrint(
-			summarizeDeck(main = input$mychooser$left[order(input$mychooser$left)], 
+			summarizeDeck(main = input$mychooser$left, 
 					draftedCards = values$deck, cmc = values$cmc,
 					type = values$type)
 	)
