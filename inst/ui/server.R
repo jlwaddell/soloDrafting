@@ -18,15 +18,30 @@ function(input, output, session) {
         
       })
 
+
+	colorID <- reactive({
+			if(input$wedgeShard == "random") {
+				colorID <- sample(c("GWUC", "WUBC", "UBRC", "BRGC", "WRGC", 
+								"WBGC", "WURC", "BGUC", "WBRC", "RUGC"), 1) 
+			} else {
+				colorID <- input$wedgeShard
+			}
+			return(colorID)	   
+		})
+
+	colorIDprint <- reactive({
+				ids <- c("GWUC", "WUBC", "UBRC", "BRGC", "WRGC", 
+						"WBGC", "WURC", "BGUC", "WBRC", "RUGC")
+				colorNames <- c("Bant", "Esper", "Grixis", "Jund", "Naya", 
+						"Abzan", "Jeskai", "Sultai", "Mardu", "Temur")
+				return(colorNames[which(ids == colorID())])
+				
+			})
+
    cardpool <- reactive({
-			   if(input$wedgeShard == "random") {
-				   colorID <- sample(c("GWU", "WUB", "UBR", "BRG", "WRG", 
-								   "WBG", "WUR", "BGU", "WBR", "RUG"), 1) 
-			   } else {
-				   colorID <- input$wedgeShard
-			   }
 			   
-			   selectedWedgeShard <- unlist(strsplit(colorID, ""))
+			   
+			   selectedWedgeShard <- unlist(strsplit(colorID(), ""))
 			   
 			   keepVec <- rep(0, nrow(cube))
 			   for(iColor in 1:nrow(cube)) {
@@ -35,17 +50,14 @@ function(input, output, session) {
 			   }
 			   
 			   cubeKeep <- cube[which(keepVec == 1), ]
-			   cubeKeep <- cubeKeep[sample(1:nrow(cubeKeep), 
+			   cubeKeep <- cubeKeep[sample(1:nrow(cubeKeep), maxPicks * 3, 
 							   prob = cubeKeep$Weight, replace = FALSE), ]
 			   cubeKeep <- sample(cubeKeep)
 			   return(cubeKeep)
 			   
 		   })
   
-#   offset <- reactive({
-#			   input$wedgeShard
-#			   return(0)
-#		   })
+  
 #   
 #   deck <- reactive({
 #			   input$wedgeShard
@@ -61,7 +73,8 @@ function(input, output, session) {
 			cmc = numeric(),
 			color = character(),
 			type = character(),
-			offset = 0) 
+			offset = 0, 
+			maxReached = FALSE) 
 	decklist <- reactive({
 				tmp <- as.data.frame(values$deck)
 				colnames(tmp) <- "Decklist"
@@ -101,18 +114,26 @@ function(input, output, session) {
 					values$cmc <- numeric()
 					values$offset <- 0
 					values$type <- character()
+					values$maxReached <- FALSE
 				
 			})
 	
-	output$picksMade <- renderText({ paste0("Picks Made: ", values$offset/3, "/", maxPicks) })
-
+	output$picksMade <- renderText({ paste0("Picks Made: ", length(values$deck), "/", maxPicks) })
+	output$selectedWedgeShard <- renderText({ paste0("Wedge/Shard: ", colorIDprint()) })
+	
 	observeEvent(input$card1picked, {
-				if(values$offset < (3 * (maxPicks) )) {
+				if(!values$maxReached) {
 					values$deck <- c(values$deck, cardpool()$Card[1+values$offset])
 					values$cmc <- c(values$cmc, cardpool()$CMC[1+values$offset])
 					values$type <- c(values$type, cardpool()$Type[1+values$offset])
-					values$offset <- values$offset + 3
 					deck <<- values$deck
+					
+					if((values$offset + 3) == (maxPicks * 3)) {
+						values$maxReached <- TRUE
+					} else {
+						values$offset <- values$offset + 3
+					}
+					
 				}
 									
 			})

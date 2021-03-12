@@ -3,7 +3,7 @@ navbarPage("Solo Drafting",
 				fluidPage(
 						
 						# For debugging
-#						actionLink(inputId = "debug_console", label = "Connect with console"),
+						actionLink(inputId = "debug_console", label = "Connect with console"),
 						
 						titlePanel(title = div(img(src = "logo.png", 
 												float = "top", height = "100px", hspace = "0px"),
@@ -14,16 +14,16 @@ navbarPage("Solo Drafting",
 						fluidRow(
 								selectInput("wedgeShard", "Select Wedge / Shard:",
 										c(      "Random" = "random", 
-												"Bant" = "GWU",
-												"Esper" = "WUB",
-												"Grixis" = "UBR", 
-												"Jund" = "BRG", 
-												"Naya" = "WRG", 
-												"Abzan" = "WBG", 
-												"Jeskai" = "WUR", 
-												"Sultai" = "BGU", 
-												"Mardu" = "WBR", 
-												"Temur" = "RUG"				
+												"Bant" = "GWUC",
+												"Esper" = "WUBC",
+												"Grixis" = "UBRC", 
+												"Jund" = "BRGC", 
+												"Naya" = "WRGC", 
+												"Abzan" = "WBGC", 
+												"Jeskai" = "WURC", 
+												"Sultai" = "BGUC", 
+												"Mardu" = "WBRC", 
+												"Temur" = "RUGC"				
 										
 										))
 						),
@@ -65,6 +65,7 @@ navbarPage("Solo Drafting",
 								
 								),
 								column(4,
+										textOutput("selectedWedgeShard"),
 										textOutput("picksMade")
 								)
 						
