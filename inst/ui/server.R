@@ -56,18 +56,6 @@ function(input, output, session) {
 			   return(cubeKeep)
 			   
 		   })
-  
-  
-#   
-#   deck <- reactive({
-#			   input$wedgeShard
-#			   return(character())
-#		   })
-#   
-#   cmc <- reactive({
-#			   input$wedgeShard
-#			   return(numeric())
-#		   })
    
 	values <- reactiveValues(deck = character(), 
 			cmc = numeric(),

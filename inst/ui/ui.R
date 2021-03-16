@@ -3,7 +3,7 @@ navbarPage("Solo Drafting",
 				fluidPage(
 						
 						# For debugging
-						actionLink(inputId = "debug_console", label = "Connect with console"),
+#						actionLink(inputId = "debug_console", label = "Connect with console"),
 						
 						titlePanel(title = div(img(src = "logo.png", 
 												float = "top", height = "100px", hspace = "0px"),
