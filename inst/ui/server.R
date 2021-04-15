@@ -183,15 +183,16 @@ function(input, output, session) {
 				cat(main, sep = "\n1 ", file = file) 	
 				cat("\n", file = file, append = TRUE)
 				
-#				side <- c(input$mychooser$right, "Academic Probation", "Basic Conjuration", 
-#						"Confront the Past", "Containment Breach", "Elemental Summoning", 
-#						"Environmental Sciences", "Expanded Anatomy", "Fractal Summoning", 
-#						"Illuminate History", "Inkling Summoning", "Introduction to Annihilation", 
-#						"Introduction to Prophecy", "Mascot Exhibition", "Mercurial Transformation", 
-#						"Necrotic Fumes", "Pest Summoning", "Reduce to Memory", "Spirit Summoning", 
-#						"Start from Scratch", "Teachings of the Archaics") # TODO expand
+				side <- c(input$mychooser$right,  "Plains", "Island", "Swamp", "Mountain", "Forest", 
+						"Academic Probation", "Basic Conjuration", 
+						"Confront the Past", "Containment Breach", "Elemental Summoning", 
+						"Environmental Sciences", "Expanded Anatomy", "Fractal Summoning", 
+						"Illuminate History", "Inkling Summoning", "Introduction to Annihilation", 
+						"Introduction to Prophecy", "Mascot Exhibition", "Mercurial Transformation", 
+						"Necrotic Fumes", "Pest Summoning", "Reduce to Memory", "Spirit Summoning", 
+						"Start from Scratch", "Teachings of the Archaics") 
 				
-				side <- c(input$mychooser$right, "Plains", "Island", "Swamp", "Mountain", "Forest") 
+#				side <- c(input$mychooser$right, "Plains", "Island", "Swamp", "Mountain", "Forest") 
 						
 				side[1] <- paste0("1 ", side[1])
 				cat(side, sep = "\n1 ", file = file, append = TRUE) 
